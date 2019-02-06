@@ -1,0 +1,18 @@
+<!--使用模板4 - 模板继承-->
+<!------------------>
+<html>
+  <head>
+    {% if title %}
+      <title>{{title}} - microblog</title>
+    {% else %}
+      <title>Notitle - microblog</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>Microblog: <a href="/index">Home</a></div>
+    <hr>
+    <!--删除下面这对 block，则 index.html 中对应的 block 部分也会消失-->
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
