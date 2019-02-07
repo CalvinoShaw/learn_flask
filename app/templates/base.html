@@ -1,17 +1,51 @@
-<!--使用模板4 - 模板继承-->
+<!-- 使用模板4 - 模板继承-->
+<!-- web表单1 - 用户登录表单-->
+<!-- web表单2 - 表单模板-->
+<!-- web表单3 - 表单视图-->
+<!------------------>
+<!-- <html>
+  <head>
+    {% if title %}
+      <title>{{title}} - 标题微博</title>
+    {% else %}
+      <title>无标题 - 标题微博</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>导航文本：微博: <a href="/index">主页</a></div>
+    <hr>
+    运行时请将改行注释掉，删除下面这对 block，则 index.html 中对应的 block 部分也会消失
+    {% block 请删掉这几个字再运行因为代码放在一起会冲突content %}
+    {% endblock %}
+  </body>
+</html> -->
+
+
+<!-- web表单4 - 接收表单数据-->
 <!------------------>
 <html>
   <head>
     {% if title %}
-      <title>{{title}} - microblog</title>
+    <title>{{title}} - 标题微博</title>
     {% else %}
-      <title>Notitle - microblog</title>
+    <title>无标题 - 标题微博</title>
     {% endif %}
   </head>
+  
   <body>
-    <div>Microblog: <a href="/index">Home</a></div>
+    <div>微博: <a href="/index">主页</a></div>
     <hr>
-    <!--删除下面这对 block，则 index.html 中对应的 block 部分也会消失-->
+    <!-- get_flashed_messages() 函数用于将 flash() 函数处理好的数据呈现出来 -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>get_flashed_messages() 函数在这里展示经过 flash() 函数处理过的数据： {{ message }} </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
     {% block content %}
     {% endblock %}
   </body>

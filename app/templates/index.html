@@ -50,8 +50,8 @@
 <!--使用模板4 - 模板继承-->
 <!--继承自 base.html 文件-->
 <!------------------>
-{% extends "base.html" %}
-    <!-- 对应 base.html 中的 block 部分-->
+<!-- {% extends "base.html" %}
+    对应 base.html 中的 block 部分
     {% block content %}
         <h1>Hi, {{user.nickname}}!</h1>
         {% for post in posts %}
@@ -59,4 +59,4 @@
                 <p>{{post.author.nickname}} says: <b>{{post.body}}</b></p>
             </div>
         {% endfor %}
-    {% endblock %}
+    {% endblock %} -->

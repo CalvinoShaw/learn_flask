@@ -1,0 +1,88 @@
+<!-- web表单4 - 表单模板-->
+<!-- web表单3 - 表单视图-->
+<!-- web表单4 - 接收表单数据-->
+<!------------------>
+<!-- extend from base layout -->
+<!-- 重用了 base.html 模板通过 extends 模板继承声明语句 -->
+<!-- {请删掉这几个字再运行因为代码放在一起会冲突% extends "base.html" %} -->
+
+<!-- {% block 请删掉这几个字再运行因为代码放在一起会冲突content %} -->
+    <!-- <h1>登录</h1>
+    模板期望一个实例化自我们刚才创建地表单类的表单对象储存成一个模板参数，称为 form
+    <form action="" method="post" name="login">
+        form.hidden_tag() 模板参数将被替换为一个隐藏字段，用来是实现在配置中激活的 CSRF 保护
+        {{form.hidden_tag()}}
+        <p>
+            请输入你的 OpenID:<br>
+            在字段应该被插入的地方指明一个 {{form.field_name}} 模板参数
+            如下例：要求表单生成一个 80 个字符宽度的 openid 字段
+            {{form.openid(size=80)}}<br>
+        </p>
+        <p>{{form.remember_me}} 记住该账号</p>
+        <p><input type="submit" value="提交按钮登录"></p>
+    </form> -->
+<!-- {% endblock %} -->
+
+
+<!-- web表单5 - 加强字段验证-->
+<!------------------>
+<!-- extend base layout -->
+<!-- {请删掉这几个字再运行因为代码放在一起会冲突% extends "base.html" %} -->
+
+<!-- {% block 请删掉这几个字再运行因为代码放在一起会冲content %} -->
+<!-- <h1>登录</h1>
+<form action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+    <p>
+        请输入你的 OpenID:<br>
+        {{ form.openid(size=5) }}<br>
+        任何需要验证的字段都会把错误信息放入 form.field_name.errors 下
+        {% for error in form.openid.errors %}
+            <span style="color: rgb(189, 54, 54);">这里是错误： {{ error }} </span>
+        {% endfor %}<br>
+    </p>
+    <p>{{ form.remember_me }} 记住该账号</p>
+    <p><input type="submit" value="提交按钮登录"></p>
+</form> -->
+<!-- {% endblock %} -->
+
+
+
+
+<!-- web表单6 - 处理OpenIDs-->
+<!------------------>
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<script type="text/javascript">
+    function set_openid(openid, pr) {
+        u = openid.search('<username>')
+        if (u != -1) {
+            // openid requires username
+            user = prompt('请输入你的 ' + pr + ' 用户名:')
+            openid = openid.substr(0, u) + user
+        }
+        form = document.forms['login'];
+        form.elements['openid'].value = openid
+    }
+</script>
+<h1>登录</h1>
+<form action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+    <p>
+        请输入你的 OpenID, 或者从下面选择一个供应商:<br>
+        {{ form.openid(size=80) }}
+        {% for error in form.openid.errors %}
+            <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        |
+        {% for pr in providers %}
+            <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a>
+        |
+        {% endfor %}
+    </p>
+    <p>{{ form.remember_me }} 记住该账号</p>
+    <p><input type="submit" value="提交按钮登录"></p>
+</form>
+{% endblock %}
