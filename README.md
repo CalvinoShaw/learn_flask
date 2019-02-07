@@ -5,6 +5,8 @@
 该仓库代码依照下列教程进行：
 http://www.pythondoc.com/flask-mega-tutorial/index.html
 
+
+
 ## 当前进度
 
 ### 第一章：Hello World
@@ -38,3 +40,16 @@ http://www.pythondoc.com/flask-mega-tutorial/index.html
   - 让某个 html 文件从另一个 html 文件中继承
   - 例如本例中的 index.html 继承自 base.html
   - 疑问：return 中的 `render_template()` 是指向了 index.html，但是即使把被继承的 base.html 中的一部分代码删掉，也照样能够显示。继承的原理是什么？
+
+
+
+### 第三章：web 表单
+
+- 回顾
+- 配置
+- 用户登录表单
+- 表单模板
+- 表单视图
+- 接收表单数据
+- 加强字段验证
+- 处理 OpenIDs
